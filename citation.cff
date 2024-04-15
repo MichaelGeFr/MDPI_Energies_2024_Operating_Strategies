@@ -1,0 +1,9 @@
+@software{Repo_Frank.2024,
+  author = {Theisinger, Lukas and Frank, Michael},
+  doi = {https://doi.org/10.20944/preprints202403.0472.v1},
+  month = {12},
+  title = {{Systematic Development of application-oriented Operating Strategies at the Example of an Industrial Heating Supply System}},
+  url = {https://github.com/MichaelGeFr/MDPI_Energies_2024_Operating_Strategies},
+  version = {1.0.0},
+  year = {2024}
+}
