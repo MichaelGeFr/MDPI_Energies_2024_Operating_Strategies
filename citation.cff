@@ -1,4 +1,4 @@
-cff-version: 1.2.0
+cff-version: 1.3.0
 message: "If you use this software, please cite it as below."
 authors:
 - family-names: "Frank"
@@ -9,6 +9,6 @@ authors:
   orcid: "https://orcid.org/0000-0001-8270-1350"
 title: "Systematic Development of application-oriented Operating Strategies at the Example of an Industrial Heating Supply System"
 version: 1.0.0
-doi: https://doi.org/10.20944/preprints202403.0472.v1
+doi: https://doi.org/10.3390/en17092086
 date-released: 2024-03-08
 url: "https://github.com/MichaelGeFr/MDPI_Energies_2024_Operating_Strategies"
