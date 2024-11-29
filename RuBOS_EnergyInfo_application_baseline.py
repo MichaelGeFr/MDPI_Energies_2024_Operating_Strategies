@@ -13,6 +13,7 @@ from pyomo.environ import *
 from RuBOS.optimization.ControlLogic_validation import *
 from RuBOS.utilities.utilities import *
 
+project_root = os.path.dirname(os.path.abspath(__file__))
 scen = "winter"
 type = "rb"
 
@@ -27,7 +28,7 @@ indexing_dict = {
     'T_flow_cool': 'T'
 }
 
-model_data = prepare_timeseries(os.path.join("C://Users//L.Theisinger_lokal//Documents//GitHub//PTW_git//dissertation_lt", "EnergyInfo_data_Merck_" + scen + ".xlsx"), indexing_dict=indexing_dict)
+model_data = prepare_timeseries(os.path.join(project_root, f"EnergyInfo_data_Merck_{scen}.xlsx"), indexing_dict=indexing_dict)
 
 thres = {
         1: 288.15
@@ -375,15 +376,15 @@ for param in param_list:
     res_df[param] = temp_list
 
 
-for conv in [11, 22, 33, 44]:
-    temp_list = []
-    for timestep in getattr(instance, 'T')._ordered_values:
-        for key in getattr(instance.controlLogic, 'c1')._data:
-            if getattr(instance.controlLogic, 'c1')._data[key].value > 0.8 and key[0] == conv and key[2] == timestep:
-                temp_list.append(key[1])
-    res_df[str(conv)] = temp_list
+# for conv in [11, 22, 33, 44]:
+#     temp_list = []
+#     for timestep in getattr(instance, 'T')._ordered_values:
+#         for key in getattr(instance.controlLogic, 'c1')._data:
+#             if getattr(instance.controlLogic, 'c1')._data[key].value > 0.8 and key[0] == conv and key[2] == timestep:
+#                 temp_list.append(key[1])
+#     res_df[str(conv)] = temp_list
 
-res_df.to_excel(os.path.join("C://Users//L.Theisinger_lokal//Documents//GitHub//PTW_git//dissertation_lt", "res_" + scen + "_" + type + ".xlsx"))
+res_df.to_excel(os.path.join(project_root, "res_" + scen + "_" + type + ".xlsx"))
 
 
 

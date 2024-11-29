@@ -10,6 +10,7 @@ python = "^3.12"
 pyomo = "^6.8.2"
 pandas = "^2.2.3"
 fsspec = "^2024.10.0"
+openpyxl = "^3.1.5"
 
 
 [build-system]

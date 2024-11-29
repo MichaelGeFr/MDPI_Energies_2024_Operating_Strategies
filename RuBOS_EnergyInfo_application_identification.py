@@ -13,6 +13,7 @@ from pyomo.environ import *
 from RuBOS.optimization.ControlLogic import *
 from RuBOS.utilities.utilities import *
 
+project_root = os.path.dirname(os.path.abspath(__file__))
 indexing_dict = {
     'T': None,
     'c_el': 'T',
@@ -24,7 +25,7 @@ indexing_dict = {
     'T_flow_cool': 'T'
 }
 
-model_data = prepare_timeseries(os.path.join("C://Users//L.Theisinger_lokal//Documents//GitHub//PTW_git//dissertation_lt", "EnergyInfo_data_Merck_" + "typescenario" + ".xlsx"), indexing_dict=indexing_dict)
+model_data = prepare_timeseries(os.path.join(project_root, "EnergyInfo_data_Merck_" + "typescenario" + ".xlsx"), indexing_dict=indexing_dict)
 
 cl_data = controlLogic_data_c1_optimization(4, model_data[None]['T'][None])
 
@@ -370,15 +371,15 @@ for param in param_list:
     res_df[param] = temp_list
 
 
-for conv in [11, 22, 33, 44]:
-    temp_list = []
-    for timestep in getattr(instance, 'T')._ordered_values:
-        for key in getattr(instance.controlLogic, 'c1')._data:
-            if getattr(instance.controlLogic, 'c1')._data[key].value > 0.8 and key[0] == conv and key[2] == timestep:
-                temp_list.append(key[1])
-    res_df[str(conv)] = temp_list
+# for conv in [11, 22, 33, 44]:
+#     temp_list = []
+#     for timestep in getattr(instance, 'T')._ordered_values:
+#         for key in getattr(instance.controlLogic, 'c1')._data:
+#             if getattr(instance.controlLogic, 'c1')._data[key].value > 0.8 and key[0] == conv and key[2] == timestep:
+#                 temp_list.append(key[1])
+#     res_df[str(conv)] = temp_list
 
-res_df.to_excel(os.path.join("C://Users//L.Theisinger_lokal//Documents//GitHub//PTW_git//dissertation_lt", "EnergyInfo_data_Merck_identification" + ".xlsx"))
+res_df.to_excel(os.path.join(project_root, "EnergyInfo_data_Merck_identification" + ".xlsx"))
 
 
 
