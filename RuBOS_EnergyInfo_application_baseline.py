@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*-coding:utf-8 -*-
 '''
-__author__      :   Lukas Theisinger 
-__version__     :   1.0
-__maintainer__  :   Michael Frank
-__contact__     :   m.frank@ptw.tu-darmstadt.de
+@File    :   RuBOS_EnergyInfo_application.py
+@Time    :   2023/02/17 13:11:00
+@Author  :   Lukas Theisinger 
+@Version :   1.0
+@Contact :   l.theisinger@ptw.tu-darmstadt.de
 '''
 
 import os
@@ -12,7 +13,6 @@ from pyomo.environ import *
 from RuBOS.optimization.ControlLogic_validation import *
 from RuBOS.utilities.utilities import *
 
-#import data sets
 scen = "winter"
 type = "rb"
 
@@ -27,9 +27,7 @@ indexing_dict = {
     'T_flow_cool': 'T'
 }
 
-current_dir=os.getcwd()
-
-model_data = prepare_timeseries(os.path.join(current_dir, "MDPI_data_Industry_" + scen + ".xlsx"), indexing_dict=indexing_dict)
+model_data = prepare_timeseries(os.path.join("C://Users//L.Theisinger_lokal//Documents//GitHub//PTW_git//dissertation_lt", "EnergyInfo_data_Merck_" + scen + ".xlsx"), indexing_dict=indexing_dict)
 
 thres = {
         1: 288.15
@@ -51,14 +49,14 @@ cl_data = controlLogic_validation(thres, rules, 1, 4, model_data[None]['T'][None
 data: P_th_heat, P_th_cool, T_amb, T_amb_avg, T_flow_heat, T_flow_cool, c_el
 
 """
-#build pyomo model
+
 model = AbstractModel()
 
-### indices declaration ###
+### indices ###
 model.T = Set(domain = NonNegativeIntegers, doc = "time step index T")
 model.C = Set(doc = "converter index C")
 
-### variables declaration ###
+### variables ###
 model.P_el_hp1 = Var(model.T, bounds = (0, 375))
 model.P_el_hp2 = Var(model.T, bounds = (0, 250))
 model.P_el_hp3 = Var(model.T, bounds = (0, 125))
@@ -93,7 +91,7 @@ model.P_th_cool_ct = Var(model.T, within = NonNegativeReals)
 model.E_th_heat = Var(model.T, bounds = (0, 800))
 model.E_th_cool = Var(model.T, bounds = (0, 800))
 
-### parameters declaration ###
+### parameters ###
 model.corr_fac_hp = 0.5
 model.rel_min_hp = 0.5
 model.switch_loss_hp = 0.2
@@ -118,7 +116,6 @@ model.dT = 1
 
 model.controlLogic = ControlLogic.create_instance(cl_data)
 
-#model energy balances
 def heat_balance1(m, T):
     if T == m.T.first():
         return m.E_th_heat[T] == m.E_th_heat_target + m.P_th_heat_hp1[T] + m.P_th_heat_hp2[T] + m.P_th_heat_hp3[T] + m.P_th_heat_chp1[T] - m.P_th_heat[T]
@@ -386,7 +383,7 @@ for conv in [11, 22, 33, 44]:
                 temp_list.append(key[1])
     res_df[str(conv)] = temp_list
 
-res_df.to_excel(os.path.join(current_dir, "res_" + scen + "_" + type + ".xlsx"))
+res_df.to_excel(os.path.join("C://Users//L.Theisinger_lokal//Documents//GitHub//PTW_git//dissertation_lt", "res_" + scen + "_" + type + ".xlsx"))
 
 
 

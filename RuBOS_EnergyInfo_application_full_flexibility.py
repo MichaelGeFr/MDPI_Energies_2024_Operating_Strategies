@@ -1,17 +1,16 @@
 #!/usr/bin/env python
 # -*-coding:utf-8 -*-
 '''
-__author__      :   Lukas Theisinger 
-__version__     :   1.0
-__maintainer__  :   Michael Frank
-__contact__     :   m.frank@ptw.tu-darmstadt.de
+@File    :   RuBOS_EnergyInfo_application.py
+@Time    :   2023/02/17 13:11:00
+@Author  :   Lukas Theisinger 
+@Version :   1.0
+@Contact :   l.theisinger@ptw.tu-darmstadt.de
 '''
 import os
 from pyomo.environ import *
 from RuBOS.optimization.ControlLogic_validation import *
 from RuBOS.utilities.utilities import *
-
-current_dir=os.getcwd()
 
 scen = "summer"
 type = "flex"
@@ -27,7 +26,7 @@ indexing_dict = {
     'T_flow_cool': 'T'
 }
 
-model_data = prepare_timeseries(os.path.join(current_dir, "MDPI_data_Industry_" + scen + ".xlsx"), indexing_dict=indexing_dict)
+model_data = prepare_timeseries(os.path.join("C://Users//L.Theisinger_lokal//Documents//GitHub//PTW_git//dissertation_lt", "EnergyInfo_data_Merck_" + scen + ".xlsx"), indexing_dict=indexing_dict)
 
 
 """ 
@@ -378,7 +377,7 @@ for param in param_list:
 #                 temp_list.append(key[1])
 #     res_df[str(conv)] = temp_list
 
-res_df.to_excel(os.path.join(current_dir, "res_" + scen + "_" + type + ".xlsx"))
+res_df.to_excel(os.path.join("C://Users//L.Theisinger_lokal//Documents//GitHub//PTW_git//dissertation_lt", "res_" + scen + "_" + type + ".xlsx"))
 
 
 

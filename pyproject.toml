@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "rule-extraction"
+version = "0.1.0"
+description = ""
+authors = ["MichaelGeFr <105793505+MichaelGeFr@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pyomo = "^6.8.2"
+pandas = "^2.2.3"
+fsspec = "^2024.10.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

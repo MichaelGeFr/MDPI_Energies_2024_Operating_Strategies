@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 # -*-coding:utf-8 -*-
-
 '''
-__author__      :   Lukas Theisinger 
-__version__     :   1.0
-__maintainer__  :   Michael Frank
-__contact__     :   m.frank@ptw.tu-darmstadt.de
+@File    :   example_application.py
+@Time    :   2023/02/17 11:02:00
+@Author  :   Lukas Theisinger 
+@Version :   1.0
+@Contact :   l.theisinger@ptw.tu-darmstadt.de
 '''
-
 
 from pyomo.environ import *
 from RuBOS.optimization.ControlLogic import *
